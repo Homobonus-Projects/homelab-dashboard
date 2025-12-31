@@ -12,9 +12,5 @@ jobs:
 
       - name: Deploy to Nginx
         run: |
-          # Tworzymy folder docelowy
-          sudo mkdir -p /var/www/dashboard
           # Kopiujemy plik
-          sudo cp index.html /var/www/dashboard/index.html
-          # Ustawiamy uprawnienia, aby Nginx mógł czytać plik
-          sudo chown -R www-data:www-data /var/www/dashboard
+          cp index.html /var/www/dashboard/index.html
