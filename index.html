@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piórniczek - Menedżer Aplikacji</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a1a2e;
+            color: #e0e0e0;
+        }
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid transparent;
+            background-color: #2a2a4a;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border-color: #00bcd4;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <div class="text-center w-full max-w-5xl">
+        <h1 class="text-5xl md:text-6xl font-extrabold mb-4 leading-tight text-white">
+            <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-500">Piórniczek</span>
+        </h1>
+        <p class="text-xl md:text-2xl mb-12 text-gray-400">Twoje aplikacje, w jednym miejscu. Po prostu kliknij i przejdź.</p>
+
+        <div id="app-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Tutaj będą dynamicznie dodawane karty aplikacji -->
+        </div>
+    </div>
+
+    <script>
+        // Dane Twoich aplikacji
+        const applications = [
+        { 
+            name: "Fuel Tracker", 
+            url: "/fuel/", 
+            icon: "⛽", 
+            description: "Monitor spalania." 
+        },
+        { 
+            name: "Planner App", 
+            url: "/planner/", 
+            icon: "📅", 
+            description: "Kalendarz dostępności." 
+        }
+        ];
+
+        // Funkcja do generowania kart aplikacji
+        function createAppCards() {
+            const appList = document.getElementById('app-list');
+            appList.innerHTML = ''; // Wyczyść zawartość przed generowaniem
+
+            applications.forEach(app => {
+                const card = document.createElement('a');
+                card.href = app.url;
+                card.target = "_blank"; // Otwórz w nowej karcie
+                card.className = "card block p-6 rounded-3xl shadow-lg hover:shadow-2xl transition-all transform hover:scale-105 cursor-pointer flex flex-col items-center justify-center text-center";
+
+                const iconDiv = document.createElement('div');
+                iconDiv.className = "text-6xl mb-4";
+                iconDiv.textContent = app.icon;
+
+                const nameH2 = document.createElement('h2');
+                nameH2.className = "text-2xl font-semibold text-white mb-2";
+                nameH2.textContent = app.name;
+
+                const descP = document.createElement('p');
+                descP.className = "text-gray-400 text-sm";
+                descP.textContent = app.description;
+
+                card.appendChild(iconDiv);
+                card.appendChild(nameH2);
+                card.appendChild(descP);
+                appList.appendChild(card);
+            });
+        }
+
+        // Wywołaj funkcję po załadowaniu strony
+        document.addEventListener('DOMContentLoaded', createAppCards);
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+name: Deploy Dashboard
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Nginx
+        run: |
+          # Tworzymy folder docelowy
+          sudo mkdir -p /var/www/dashboard
+          # Kopiujemy plik
+          sudo cp index.html /var/www/dashboard/index.html
+          # Ustawiamy uprawnienia, aby Nginx mógł czytać plik
+          sudo chown -R www-data:www-data /var/www/dashboard
